@@ -20,7 +20,7 @@ const LocationsContainer: React.FC = () => {
     getLocations().then((i) => {
       setLocations(i?.results)
     })
-  }, [])
+  }, [setLocations])
   return (
     <div className='flex flex-wrap justify-center gap-6 px-6 my-10 md:justify-between'>
       {locations.map((location: LocationType, index: number) => (

@@ -10,7 +10,7 @@ const CardContainer: React.FC = () => {
     getCharacters().then((i) => {
       setCharacters(i?.results)
     })
-  }, [])
+  }, [setCharacters])
 
   return (
     <div className='flex flex-wrap justify-center gap-6 px-6 my-10 md:justify-between'>

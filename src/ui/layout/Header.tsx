@@ -20,7 +20,14 @@ const Header: React.FC = () => {
         return await logout()
       }
     } catch (error) {
-      console.log(error)
+      setUser({
+        email: '',
+        password: '',
+        id: '',
+        user_id: '',
+        favorites: [],
+      })
+      return await logout()
     }
   }
 
@@ -42,7 +49,7 @@ const Header: React.FC = () => {
     },
   ]
   return (
-    <header className='flex items-center justify-between w-full px-6 py-8'>
+    <header className='flex items-center justify-between w-full px-6 py-8 max-w-'>
       <div className='flex md:hidden'>
         <HeaderMenu menu={menu} />
       </div>
@@ -53,7 +60,9 @@ const Header: React.FC = () => {
           </NavLink>
         ))}
       </div>
-      <button className='px-4 py-2 border rounded-lg '>
+      <button
+        className={`px-4 py-2 border rounded-lg ${!user?.user_id ? 'bg-blue-500 text-white' : 'text-black bg-white'}`}
+      >
         <NavLink onClick={handleSession} to={user?.user_id ? '/' : '/login'}>
           {user?.user_id !== '' ? 'Cerrar sesión' : 'Inicio de sesión'}
         </NavLink>
