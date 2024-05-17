@@ -24,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +64,9 @@
   "main": "index.tsx",
   "author": "MaidedPonce <maided.h.p90@gmail.com>",
   "license": "MIT",
+  "homepage" : "https://MaidedPonce.github.io/rick-and-morty",
   "devDependencies": {
+    "gh-pages": "^6.1.1",
     "prettier": "3.2.5",
     "tailwindcss": "^3.4.3"
   }

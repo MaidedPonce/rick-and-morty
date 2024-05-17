@@ -11,7 +11,11 @@ const Character: React.FC<CharacterProps> = ({ character, isFavorite }) => {
   return (
     <div className='flex flex-col items-center justify-between w-full gap-2 p-4 rounded-md shadow-lg min-w-64 max-w-56'>
       <figure className='overflow-hidden rounded-full w-28 h-28'>
-        <img src={character?.image} alt={character?.name} />
+        <img
+          className='aspect-square'
+          src={character?.image}
+          alt={character?.name}
+        />
       </figure>
       <div className='text-center'>
         <h1 className='font-semibold'>{character?.name}</h1>

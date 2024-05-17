@@ -1,7 +1,7 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Home from 'src/ui/container/Home'
-import Provider from './context'
+import Provider from 'src/context'
 import Header from 'src/ui/layout/Header'
 import Login from 'src/ui/container/Login'
 import Auth from 'src/ui/container/Auth'
