@@ -47,7 +47,12 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const filterFavorites = async () => {
     const doc = await getFavorites(user.user_id)
     const char = doc?.characters || []
-    if (char.length === 1) return
+    if (char.length === 1) {
+      return setUser({
+        ...user,
+        favorites: [...char],
+      })
+    }
     return setUser({
       ...user,
       favorites: [...user?.favorites, ...char],
