@@ -9,7 +9,6 @@ const Auth: React.FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate()
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
-      console.log(user)
       if (user !== null) {
         return setUser({ ...userProps, user_id: user.uid })
       } else {
