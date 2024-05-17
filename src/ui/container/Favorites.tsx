@@ -8,6 +8,7 @@ const Favorites: React.FC = () => {
     user: { favorites },
     isFavorite,
   } = useContext(UserContext)
+  console.log(favorites)
   return (
     <div className='flex flex-wrap justify-center gap-6 px-6 my-10 md:justify-between'>
       {favorites.map((fav, index) => (

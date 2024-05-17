@@ -24,6 +24,7 @@ const Form: React.FC = () => {
               .then((u) => {
                 setUser({ ...user, user_id: u.user.uid })
                 setLoading(false)
+                navigate('/', { replace: true })
               })
               .catch(() => {
                 toast.error('Algo ha salido mal, intenta más tarde')
@@ -55,6 +56,7 @@ const Form: React.FC = () => {
       toast.error('Algo ha salido mal, intenta más tarde')
     }
   }
+  console.log(user)
   return (
     <div className='flex items-center justify-center'>
       <form
