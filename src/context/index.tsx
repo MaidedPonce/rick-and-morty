@@ -56,11 +56,10 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     ;(async () => {
       const docs = await getDocId(user.user_id)
-      console.log(docs)
       setUser({ ...user, id: docs || '' })
     })()
   }, [user.user_id, user.favorites, user.email])
-  console.log(user)
+
   const isFavorite = (fav: string) => {
     const verifyId = user.favorites.map((favs) => favs.name)
     return verifyId.includes(fav)
@@ -84,7 +83,6 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
       const getError = JSON.stringify(e)
       const error = JSON.parse(getError)
       if (error.code.match('invalid-argument')) {
-        console.log(user.favorites)
         saveNewCollection({
           characters: [character],
           user_id: user.user_id,

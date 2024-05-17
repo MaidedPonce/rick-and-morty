@@ -32,9 +32,12 @@ export interface LoginProps {
   password?: string
 }
 
-export interface DocType {
-  characters?: CharacterType[]
+export interface Doc {
+  characters?: (CharacterType | LocationType)[]
   user_id?: string
+}
+
+export interface DocType extends Doc {
   id: string
 }
 
@@ -52,4 +55,9 @@ export interface LocationType {
 export interface FavoriteButtonType {
   name: string
   data: CharacterType | LocationType
+}
+
+export interface UpdateDataType {
+  data: { [key: string]: any };
+  doc_id: string;
 }

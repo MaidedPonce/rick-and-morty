@@ -16,7 +16,6 @@ const Form: React.FC = () => {
       }
       user.email !== undefined &&
         (await checkIfExists(user.email).then((i) => {
-          console.log(i.length)
           if (i.length === 0) {
             register({
               email: user.email,
@@ -34,7 +33,6 @@ const Form: React.FC = () => {
                 navigate('/', { replace: true })
               })
               .catch((error) => {
-                console.log(error)
                 const getCode = JSON.stringify(error)
                 const parseCode = JSON.parse(getCode)
                 if (parseCode.code.match('auth/wrong-password')) {
