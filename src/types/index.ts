@@ -1,4 +1,4 @@
-export interface Character {
+export interface CharacterType {
     id: number;
     name: string;
     status: string;
@@ -24,7 +24,7 @@ export interface UserType {
   password?: string
   id: string
   user_id: string
-  favorites:  (Character | LocationType)[]
+  favorites:  (CharacterType | LocationType)[]
 }
 
 export interface LoginProps {
@@ -33,7 +33,7 @@ export interface LoginProps {
 }
 
 export interface DocType {
-  characters?: Character[]
+  characters?: CharacterType[]
   user_id?: string
   id: string
 }
@@ -51,5 +51,5 @@ export interface LocationType {
 
 export interface FavoriteButtonType {
   name: string
-  data: Character | LocationType
+  data: CharacterType | LocationType
 }

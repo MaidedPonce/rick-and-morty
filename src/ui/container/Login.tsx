@@ -1,12 +1,8 @@
 import React from 'react'
-import Form from '../components/Form'
+import Form from 'src/ui/components/Form'
 
-const Login = () => {
-  return (
-    <div>
-      <Form />
-    </div>
-  )
+const Login: React.FC = () => {
+  return <Form />
 }
 
 export default Login

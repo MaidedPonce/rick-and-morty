@@ -13,9 +13,8 @@ export interface LocationType {
   created: Date
 }
 
-const LocationsContainer = () => {
-  const { setLocations, locations, isFavorite, addFavorite } =
-    useContext(UserContext)
+const LocationsContainer: React.FC = () => {
+  const { setLocations, locations, isFavorite } = useContext(UserContext)
 
   useEffect(() => {
     getLocations().then((i) => {
@@ -25,12 +24,7 @@ const LocationsContainer = () => {
   return (
     <div className='flex flex-wrap justify-center gap-6 px-6 my-10 md:justify-between'>
       {locations.map((location: LocationType, index: number) => (
-        <Location
-          key={index}
-          location={location}
-          addFavorite={addFavorite}
-          isFavorite={isFavorite}
-        />
+        <Location key={index} location={location} isFavorite={isFavorite} />
       ))}
     </div>
   )

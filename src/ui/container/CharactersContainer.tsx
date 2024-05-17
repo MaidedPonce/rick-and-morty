@@ -1,11 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { getCharacters } from '../../services/characters/get-characters'
-import Card from '../components/Character'
+import { getCharacters } from 'src/services/characters/get-characters'
 import { UserContext } from 'src/context'
+import Character from 'src/ui/components/Character'
 
-const CardContainer = () => {
-  const { setCharacters, characters, isFavorite, addFavorite } =
-    useContext(UserContext)
+const CardContainer: React.FC = () => {
+  const { setCharacters, characters, isFavorite } = useContext(UserContext)
 
   useEffect(() => {
     getCharacters().then((i) => {
@@ -16,12 +15,7 @@ const CardContainer = () => {
   return (
     <div className='flex flex-wrap justify-center gap-6 px-6 my-10 md:justify-between'>
       {characters.map((character, index) => (
-        <Card
-          key={index}
-          character={character}
-          addFavorite={addFavorite}
-          isFavorite={isFavorite}
-        />
+        <Character key={index} character={character} isFavorite={isFavorite} />
       ))}
     </div>
   )

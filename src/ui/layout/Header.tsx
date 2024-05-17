@@ -1,10 +1,12 @@
 import { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { UserContext } from 'src/context'
 import { logout } from 'src/services/auth'
+import HeaderMenu from '../components/Menu'
 
-const Header = () => {
+const Header: React.FC = () => {
   const { user, setUser } = useContext(UserContext)
+  const location = useLocation()
   const handleSession = async () => {
     try {
       if (user?.user_id) {
@@ -22,18 +24,34 @@ const Header = () => {
     }
   }
 
+  const menu = [
+    {
+      to: '/',
+      text: 'Inicio',
+      style: `${location.pathname === '/' && 'text-blue-500'} cursor-pointer hover:text-blue-500`,
+    },
+    {
+      to: '/ubications',
+      text: 'Ubicaciones',
+      style: `${location.pathname === '/ubications' && 'text-blue-500'} cursor-pointer hover:text-blue-500`,
+    },
+    {
+      to: '/favorites',
+      text: 'Favoritos',
+      style: `${location.pathname === '/favorites' && 'text-blue-500'} cursor-pointer hover:text-blue-500`,
+    },
+  ]
   return (
     <header className='flex items-center justify-between w-full px-6 py-8'>
-      <div className='flex justify-between gap-6'>
-        <NavLink to={'/'} className='cursor-pointer'>
-          Inicio
-        </NavLink>
-        <NavLink to={'/ubications'} className='cursor-pointer'>
-          Ubicaciones
-        </NavLink>
-        <NavLink to={'/favorites'} className='cursor-pointer'>
-          Favoritos
-        </NavLink>
+      <div className='flex md:hidden'>
+        <HeaderMenu menu={menu} />
+      </div>
+      <div className='justify-between hidden gap-6 md:flex'>
+        {menu.map((section, index) => (
+          <NavLink key={index} to={section.to} className={section.style}>
+            {section.text}
+          </NavLink>
+        ))}
       </div>
       <button className='px-4 py-2 border rounded-lg '>
         <NavLink onClick={handleSession} to={user?.user_id ? '/' : '/login'}>

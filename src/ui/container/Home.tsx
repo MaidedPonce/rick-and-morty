@@ -1,6 +1,6 @@
 import CharactersContainer from './CharactersContainer'
 
-const Home = () => {
+const Home: React.FC = () => {
   return <CharactersContainer />
 }
 

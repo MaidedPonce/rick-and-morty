@@ -1,16 +1,18 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './ui/container/Home'
+import Home from 'src/ui/container/Home'
 import Provider from './context'
-import Header from './ui/layout/Header'
-import Login from './ui/container/Login'
-import Auth from './ui/container/Auth'
-import Favorites from './ui/container/Favorites'
-import LocationsContainer from './ui/container/LocationsContainer'
+import Header from 'src/ui/layout/Header'
+import Login from 'src/ui/container/Login'
+import Auth from 'src/ui/container/Auth'
+import Favorites from 'src/ui/container/Favorites'
+import LocationsContainer from 'src/ui/container/LocationsContainer'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
     <Provider>
+      <Toaster />
       <Auth>
         <HashRouter>
           <Header />

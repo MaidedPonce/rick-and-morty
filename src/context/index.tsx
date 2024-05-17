@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { ReactNode, createContext, useEffect, useState } from 'react'
-import { Character, FavoriteButtonType, LocationType, UserType } from '../types'
+import {
+  CharacterType,
+  FavoriteButtonType,
+  LocationType,
+  UserType,
+} from 'src/types'
 import {
   getDocId,
   getFavorites,
@@ -11,13 +16,13 @@ import {
 interface UserContextType {
   user: UserType
   setUser: React.Dispatch<React.SetStateAction<UserType>>
-  characters: Character[]
-  setCharacters: React.Dispatch<React.SetStateAction<Character[]>>
+  characters: CharacterType[]
+  setCharacters: React.Dispatch<React.SetStateAction<CharacterType[]>>
   filterFavorites: () => Promise<void>
-  locations: any
-  setLocations: React.Dispatch<React.SetStateAction<any[]>>
-  addFavorite: (character: Character | LocationType) => Promise<void>
-  isFavorite: (fav: string) => void
+  locations: LocationType[]
+  setLocations: React.Dispatch<React.SetStateAction<LocationType[]>>
+  addFavorite: (character: CharacterType | LocationType) => Promise<void>
+  isFavorite: (fav: string) => boolean
   deleteFavorite: (fav: string) => void
   handleFavoriteButton: ({ name, data }: FavoriteButtonType) => void
 }
@@ -33,12 +38,11 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
     favorites: [],
   })
 
-  const [characters, setCharacters] = useState<Character[]>([])
-  const [locations, setLocations] = useState<any[]>([])
+  const [characters, setCharacters] = useState<CharacterType[]>([])
+  const [locations, setLocations] = useState<LocationType[]>([])
   const filterFavorites = async () => {
     const doc = await getFavorites(user.user_id)
     const char = doc?.characters || []
-    console.log(char)
     return setUser({
       ...user,
       favorites: [...user?.favorites, ...char],
@@ -63,8 +67,8 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }
 
   const addFavorite: (
-    character: Character | LocationType,
-  ) => Promise<void> = async (character: Character | LocationType) => {
+    character: CharacterType | LocationType,
+  ) => Promise<void> = async (character: CharacterType | LocationType) => {
     if (isFavorite(character.name)) return
     setUser({
       ...user,
