@@ -28,7 +28,6 @@ export const saveNewCollection = (data: Doc) => {
 }
 
 const updateFavorites = async ({ data, doc_id }: UpdateDataType) => {
-  console.log(data)
   const updatedDoc = await updateDoc(doc(db, 'favorites', doc_id), data)
   return updatedDoc
 }

@@ -1,5 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { ReactNode, createContext, useEffect, useState } from 'react'
+import React, {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import {
   CharacterType,
   FavoriteButtonType,
@@ -41,25 +47,25 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   const [characters, setCharacters] = useState<CharacterType[]>([])
   const [locations, setLocations] = useState<LocationType[]>([])
-  const filterFavorites = async () => {
+  const filterFavorites = useCallback(async () => {
     const doc = await getFavorites(user.user_id)
     const char = doc?.characters || []
     return setUser({
       ...user,
       favorites: [...user?.favorites, ...char],
     })
-  }
+  }, [user])
 
   useEffect(() => {
     filterFavorites()
-  }, [user.id])
+  }, [filterFavorites])
 
   useEffect(() => {
     ;(async () => {
       const docs = await getDocId(user.user_id)
       setUser({ ...user, id: docs || '' })
     })()
-  }, [user.user_id, user.favorites, user.email])
+  }, [user])
 
   const isFavorite = (fav: string) => {
     const verifyId = user.favorites.map((favs) => favs.name)
