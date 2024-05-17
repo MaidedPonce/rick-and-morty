@@ -83,7 +83,6 @@ const Form: React.FC = () => {
             className='w-full px-2 py-2 border rounded-md outline-none appearance-none focus:ring-blue-500 focus:ring-2 active:ring-blue-500 active:ring-2 peer'
             id='password'
             placeholder='********'
-            autoComplete='new-password'
             required
             min={7}
             onChange={(e) => setUser({ ...user, password: e.target.value })}
