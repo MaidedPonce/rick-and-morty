@@ -12,51 +12,52 @@ const Form: React.FC = () => {
     setLoading(true)
     try {
       user.email !== undefined &&
-        (await checkIfExists(user.email).then((i) => {
-          if (i.length === 0) {
-            if (user.password !== undefined && user?.password?.length < 7) {
-              return toast.error('La contraseña debe tener 7 dígitos mínimo')
-            }
-            register({
-              email: user.email,
-              password: user.password,
-            })
-              .then((u) => {
-                setUser({ ...user, user_id: u.user.uid })
-                setLoading(false)
-                navigate('/', { replace: true })
+        (await checkIfExists(user.email)
+          .then((i) => {
+            if (i.length === 0) {
+              if (user.password !== undefined && user?.password?.length < 7) {
+                return toast.error('La contraseña debe tener 7 dígitos mínimo')
+              }
+              register({
+                email: user.email,
+                password: user.password,
               })
-              .catch(() => {
-                toast.error('Algo ha salido mal, intenta más tarde')
-                setLoading(false)
-              })
-          } else {
-            login({
-              email: user?.email,
-              password: user?.password,
-            })
-              .then((u) => {
-                setUser({ ...user, user_id: u.user.uid })
-                navigate('/', { replace: true })
-              })
-              .catch((error) => {
-                const getCode = JSON.stringify(error)
-                const parseCode = JSON.parse(getCode)
-                if (parseCode.code.match('auth/wrong-password')) {
-                  toast.error('Contraseña incorrrecta')
-                  setLoading(false)
-                } else {
+                .then((u) => {
+                  setUser({ ...user, user_id: u.user.uid })
+
+                  navigate('/', { replace: true })
+                })
+                .catch(() => {
                   toast.error('Algo ha salido mal, intenta más tarde')
-                  setLoading(false)
-                }
+                })
+            } else {
+              login({
+                email: user?.email,
+                password: user?.password,
               })
-          }
-        }))
+                .then((u) => {
+                  setUser({ ...user, user_id: u.user.uid })
+                  navigate('/', { replace: true })
+                })
+                .catch((error) => {
+                  const getCode = JSON.stringify(error)
+                  const parseCode = JSON.parse(getCode)
+                  if (parseCode.code.match('auth/wrong-password')) {
+                    toast.error('Contraseña incorrrecta')
+                  } else {
+                    toast.error('Algo ha salido mal, intenta más tarde')
+                  }
+                })
+            }
+          })
+          .finally(() => {
+            setLoading(false)
+          }))
     } catch (error) {
       toast.error('Algo ha salido mal, intenta más tarde')
     }
   }
-  console.log(user)
+  console.log(user, loading)
   return (
     <div className='flex items-center justify-center'>
       <form
