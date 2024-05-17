@@ -44,7 +44,7 @@ const HeaderMenu: React.FC<MenuProps> = ({ menu }) => {
       >
         <MenuItems
           anchor='bottom end'
-          className='w-52 left-[1.5rem!important] origin-top-right bg-white shadow-md rounded-xl border border-white/5 bg-white/5 p-1 text-sm/6 text-black [--anchor-gap:var(--spacing-1)] focus:outline-none'
+          className='w-52 left-[1.5rem!important] origin-top-right bg-white shadow-md rounded-xl p-1 text-sm/6 text-black [--anchor-gap:var(--spacing-1)] focus:outline-none'
         >
           {menu.map((section) => (
             <MenuItem key={section.text}>

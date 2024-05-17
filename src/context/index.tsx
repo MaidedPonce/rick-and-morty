@@ -12,6 +12,7 @@ import {
   saveNewCollection,
   updateFavorites,
 } from 'src/services/db'
+import toast from 'react-hot-toast'
 
 interface UserContextType {
   user: UserType
@@ -110,6 +111,10 @@ const Provider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }
 
   const handleFavoriteButton = ({ name, data }: FavoriteButtonType) => {
+    if (!user.user_id)
+      return toast('¡Tienes que iniciar sesión para añadir favoritos', {
+        icon: '⚠️',
+      })
     if (isFavorite(name)) {
       deleteFavorite(name)
     } else {
