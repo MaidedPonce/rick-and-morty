@@ -17,8 +17,8 @@ function App() {
   return (
     <Provider>
       <Toaster />
-      <Auth>
-        <HashRouter>
+      <HashRouter>
+        <Auth>
           <Header />
           <Suspense
             fallback={
@@ -34,8 +34,8 @@ function App() {
               <Route path='/ubications' element={<LocationsContainer />} />
             </Routes>
           </Suspense>
-        </HashRouter>
-      </Auth>
+        </Auth>
+      </HashRouter>
     </Provider>
   )
 }
